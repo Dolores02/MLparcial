@@ -45,7 +45,7 @@ public class MutanteServiceImpl extends BaseServiceImpl<Mutante, Long> implement
                     if (counter>1) {
                         estadoMutantesService.incrementarMutantes();// actualizo el contador de mutantes en la base de datos
                         Mutante mutante = new Mutante(dna);
-                        mutanteRepository.save(mutante);
+                        mutanteRepository.save(mutante);  //guardo
                         return true;   //si hay mas de una secuencia, ES MUTANTE
                     }
                 }

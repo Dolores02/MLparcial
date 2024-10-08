@@ -16,7 +16,7 @@ import org.hibernate.envers.Audited;
 @Builder
 @Table(name = "Mutantes")
 public class Mutante extends Base{
-    @Column(nullable = false)
+    @Column(nullable = false, name ="dna", unique = true)
     private String[] dna;
 
 }

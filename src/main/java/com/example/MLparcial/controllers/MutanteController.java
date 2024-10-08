@@ -25,7 +25,9 @@ public class MutanteController extends BaseControllerImpl <Mutante, MutanteServi
            boolean isMutant = mutanteServiceImpl.isMutant(mutante.getDna());
 
            if (isMutant) {
-               return ResponseEntity.ok().build();  //200ok
+
+               return ResponseEntity.ok().build();//200ok
+
            } else {
                return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); //403 forbidden
            }
@@ -35,11 +37,14 @@ public class MutanteController extends BaseControllerImpl <Mutante, MutanteServi
     }
     @PostMapping("/mutant/save")
     @Override
-    public ResponseEntity<?> save(Mutante entity){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
+    public ResponseEntity<?> save(@RequestBody Mutante entity) {
+        try {
+            Mutante savedMutante = servicio.save(entity); // Asumiendo que servicio.save devuelve el mutante guardado
+            return ResponseEntity.status(HttpStatus.OK).body(savedMutante);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
+
 }
