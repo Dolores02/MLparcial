@@ -10,6 +10,7 @@ import org.hibernate.envers.Audited;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Audited
 @Builder

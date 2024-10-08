@@ -19,14 +19,19 @@ public class MutanteController extends BaseControllerImpl <Mutante, MutanteServi
     @Autowired
     private MutanteServiceImpl mutanteServiceImpl;
 
-    @PostMapping(path = "/mutante")
-    public ResponseEntity<?> checkMutant(@RequestBody String[] dna){
-        boolean isMutant = mutanteServiceImpl.isMutant(dna);
-        if(isMutant){
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    @PostMapping(path = "/mutant")
+    public ResponseEntity<?> checkMutant(@RequestBody Mutante mutante){
+       try {
+           boolean isMutant = mutanteServiceImpl.isMutant(mutante.getDna());
+
+           if (isMutant) {
+               return ResponseEntity.ok().build();  //200ok
+           } else {
+               return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); //403 forbidden
+           }
+       } catch (IllegalArgumentException e) {
+           return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); //403 forbidden
+       }
     }
     @PostMapping("/mutant/save")
     @Override
